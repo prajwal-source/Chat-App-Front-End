@@ -1,16 +1,31 @@
-import {  createContext,useContext,useState } from "react";
-const ChatContext=createContext();
+import { createContext, useContext, useState, useEffect } from "react";
 
-export const ChatProvider=({children})=>{
-    const [roomId,setRoomId]=useState("")
-    const [currentUser,setCurrentUser]=useState("")
-    const [connected,setConnected]=useState(false)
-  return ( <ChatContext.Provider value={{roomId,currentUser,connected,setRoomId,setCurrentUser,setConnected}}>
-    {children}
+const ChatContext = createContext();
 
-  </ChatContext.Provider>
+export const ChatProvider = ({ children }) => {
+  const [roomId, setRoomId] = useState(() => localStorage.getItem("roomId") || "");
+  const [currentUser, setCurrentUser] = useState(() => localStorage.getItem("currentUser") || "");
+  const [connected, setConnected] = useState(() => JSON.parse(localStorage.getItem("connected")) || false);
+
+  // Save state to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("roomId", roomId);
+  }, [roomId]);
+
+  useEffect(() => {
+    localStorage.setItem("currentUser", currentUser);
+  }, [currentUser]);
+
+  useEffect(() => {
+    localStorage.setItem("connected", JSON.stringify(connected));
+  }, [connected]);
+
+  return (
+    <ChatContext.Provider value={{ roomId, currentUser, connected, setRoomId, setCurrentUser, setConnected }}>
+      {children}
+    </ChatContext.Provider>
   );
-}
+};
 
-const useChatContext=()=>useContext(ChatContext)
+const useChatContext = () => useContext(ChatContext);
 export default useChatContext;

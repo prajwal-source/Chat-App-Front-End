@@ -52,7 +52,7 @@ function JoinCreateRoom  (){
         }
            else{
             toast.error("Error in joining room...")
-            console.log(error);
+            // console.log(error);
            }
           }
      
@@ -78,7 +78,7 @@ function JoinCreateRoom  (){
         joinChat();
         
       } catch (error) {
-        console.log(error)
+        // console.log(error)
         if(error.response && error.response.status === 400){
             toast.error("Room Already Exist..");
             

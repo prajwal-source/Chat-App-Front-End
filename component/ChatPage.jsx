@@ -70,6 +70,7 @@ const ChatPage = () => {
       ///SockJS
       const sock = new SockJS(`${baseURL}/chat`);
       const client = Stomp.over(sock);
+      client.debug = () => {};
 
       client.connect({}, () => {
         setStompClient(client);
@@ -99,7 +100,7 @@ const ChatPage = () => {
     //send message handle
      const sendMessage = async () => {
     if (stompClient && connected && input.trim()) {
-      console.log(input);
+      // console.log(input);
 
       const message = {
         sender: currentUser,
