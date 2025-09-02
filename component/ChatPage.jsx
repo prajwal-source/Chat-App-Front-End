@@ -22,15 +22,15 @@ const ChatPage = () => {
   // console.log(roomId);
   // console.log(currentUser);
   // console.log(connected);
-    
-    const navigate = useNavigate();
+
+  const navigate = useNavigate();
   useEffect(() => {
     if (!connected) {
       navigate("/");
     }
   }, [connected, roomId, currentUser]);
 
- const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const chatBoxRef = useRef(null);
@@ -38,14 +38,14 @@ const ChatPage = () => {
 
 
 
-    //load messages
-    useEffect(() => {
+  //load messages
+  useEffect(() => {
     async function loadMessages() {
       try {
         const messages = await getMessages(roomId);
         // console.log(messages);
         setMessages(messages);
-      } catch (error) {}
+      } catch (error) { }
     }
     if (connected) {
       loadMessages();
@@ -53,8 +53,8 @@ const ChatPage = () => {
   }, []);
 
 
-    //scroll down
-     useEffect(() => {
+  //scroll down
+  useEffect(() => {
     if (chatBoxRef.current) {
       chatBoxRef.current.scroll({
         top: chatBoxRef.current.scrollHeight,
@@ -63,14 +63,14 @@ const ChatPage = () => {
     }
   }, [messages]);
 
-    //stomp client in it
-    //subscibe
-    useEffect(() => {
+  //stomp client in it
+  //subscibe
+  useEffect(() => {
     const connectWebSocket = () => {
       ///SockJS
       const sock = new SockJS(`${baseURL}/chat`);
       const client = Stomp.over(sock);
-      client.debug = () => {};
+      client.debug = () => { };
 
       client.connect({}, () => {
         setStompClient(client);
@@ -97,8 +97,8 @@ const ChatPage = () => {
   }, [roomId]);
 
 
-    //send message handle
-     const sendMessage = async () => {
+  //send message handle
+  const sendMessage = async () => {
     if (stompClient && connected && input.trim()) {
       // console.log(input);
 
@@ -115,11 +115,11 @@ const ChatPage = () => {
       );
       setInput("");
     }
-//
+    //
   };
 
-    // logout
- function handleLogout() {
+  // logout
+  function handleLogout() {
     stompClient.disconnect();
     setConnected(false);
     setRoomId("");
@@ -158,30 +158,28 @@ const ChatPage = () => {
 
       <main
         ref={chatBoxRef}
-        className="py-20 px-10   w-2/3 dark:bg-slate-600 mx-auto h-screen overflow-auto "
+        className="pt-24 pb-20 px-4 sm:px-6 md:px-10 w-full md:w-2/3 dark:bg-slate-600 mx-auto h-screen overflow-auto"
       >
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`flex ${
-              message.sender === currentUser ? "justify-end" : "justify-start"
-            } `}
+            className={`flex ${message.sender === currentUser ? "justify-end" : "justify-start"
+              }`}
           >
             <div
-              className={`my-2 ${
-                message.sender === currentUser ? "bg-green-800" : "bg-gray-800"
-              } p-2 max-w-xs rounded`}
+              className={`my-2 ${message.sender === currentUser ? "bg-green-800" : "bg-gray-800"
+                } p-2 max-w-[80%] sm:max-w-xs rounded break-words`}
             >
-              <div className="flex flex-row gap-2">
+              <div className="flex items-start gap-2">
                 <img
-                  className="h-10 w-10"
-                  src={"https://avatar.iran.liara.run/public/43"}
+                  className="h-8 w-8 sm:h-10 sm:w-10 rounded-full"
+                  src="https://avatar.iran.liara.run/public/43"
                   alt=""
                 />
                 <div className="flex flex-col gap-1">
-                  <p className="text-sm font-bold">{message.sender}</p>
-                  <p>{message.content}</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs sm:text-sm font-bold">{message.sender}</p>
+                  <p className="text-sm sm:text-base">{message.content}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400">
                     {timeAgo(message.timeStamp)}
                   </p>
                 </div>
@@ -190,34 +188,24 @@ const ChatPage = () => {
           </div>
         ))}
       </main>
-      {/* input message container */}
-      <div className=" fixed bottom-4 w-full h-16 ">
-        <div className="h-full  pr-10 gap-4 flex items-center justify-between rounded-full w-1/2 mx-auto dark:bg-gray-900">
+
+      {/* input bar */}
+      <div className="fixed bottom-4 w-full px-3 sm:px-6">
+        <div className="h-14 flex items-center gap-3 rounded-full max-w-2xl mx-auto dark:bg-gray-900 px-3 sm:px-5">
           <input
             value={input}
-            onChange={(e) => {
-              setInput(e.target.value);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                sendMessage();
-              }
-            }}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             type="text"
-            placeholder="Type your message here..."
-            className=" w-full  dark:border-gray-600 b dark:bg-gray-800  px-5 py-2 rounded-full h-full focus:outline-none  "
+            placeholder="Type your message..."
+            className="flex-1 dark:border-gray-600 dark:bg-gray-800 px-3 py-2 rounded-full focus:outline-none text-sm sm:text-base"
           />
-
-          <div className="flex gap-1">
-         
-            <button
-              onClick={sendMessage}
-              className="dark:bg-green-600 h-10 w-20  flex   justify-center items-center rounded-3xl"
-            >
-                <p onClick={sendMessage}>Send</p>
-             
-            </button>
-          </div>
+          <button
+            onClick={sendMessage}
+            className="dark:bg-green-600 hover:dark:bg-green-700 h-10 px-4 flex justify-center items-center rounded-3xl text-sm sm:text-base"
+          >
+            Send
+          </button>
         </div>
       </div>
     </div>
