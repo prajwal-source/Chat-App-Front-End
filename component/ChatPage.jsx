@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import useChatContext from '../Context/ChatContext';
 import { useNavigate } from 'react-router';
 import { getMessages } from '../service/roomService';
-import { timeAgo } from '../config/Helper';
+
 
 
 const ChatPage = () => {
@@ -180,7 +180,7 @@ const ChatPage = () => {
                   <p className="text-xs sm:text-sm font-bold">{message.sender}</p>
                   <p className="text-sm sm:text-base">{message.content}</p>
                   <p className="text-[10px] sm:text-xs text-gray-400">
-                    {timeAgo(message.timeStamp)}
+                 
                   </p>
                 </div>
               </div>
