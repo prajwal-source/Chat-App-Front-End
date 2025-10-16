@@ -91,17 +91,22 @@ function JoinCreateRoom() {
     }
   }
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6">
-      <div className="w-full max-w-md p-6 sm:p-10 border border-gray-700 rounded-lg sm:rounded-xl flex flex-col gap-6 dark:bg-gray-900 shadow-lg">
+    <div className="min-h-screen text-white  flex items-center justify-center px-4 sm:px-6">
+      <div className="w-full max-w-md p-6 sm:p-10 border border-gray-700 rounded-lg sm:rounded-xl flex flex-col gap-6 bg-gray-900 dark:bg-gray-900 shadow-lg">
         {/* Logo */}
         <div className="flex justify-center">
           <img src={ChatIcon} alt="My Chat" className="w-20 sm:w-24" />
         </div>
 
         {/* Title */}
-        <h1 className="text-xl sm:text-2xl font-semibold text-center">
+        <div className='text-center'>
+            <h1 className="text-xl sm:text-2xl font-semibold text-center">
           Create and Join Room
         </h1>
+        <h2>( This site may take 5 min to start ) </h2>
+        </div>
+        
+        
 
         {/* Name Input */}
         <div>
@@ -115,7 +120,7 @@ function JoinCreateRoom() {
             placeholder="Enter your name"
             type="text"
             id="name"
-            className="w-full dark:bg-gray-800 px-3 sm:px-4 py-3 sm:py-4 border dark:border-gray-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+            className="w-full dark:bg-gray-800 bg-gray-800 px-3 sm:px-4 py-3 sm:py-4 border dark:border-gray-600 border-gray-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
           />
         </div>
 
@@ -131,7 +136,7 @@ function JoinCreateRoom() {
             placeholder="Enter Room ID"
             type="text"
             id="room_id"
-            className="w-full dark:bg-gray-800 px-3 sm:px-4 py-3 sm:py-4 border dark:border-gray-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+            className="w-full dark:bg-gray-800 bg-gray-800 px-3 sm:px-4 py-3 sm:py-4 border dark:border-gray-600 border-gray-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
           />
         </div>
 
@@ -139,13 +144,13 @@ function JoinCreateRoom() {
         <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-5 mt-4">
           <button
             onClick={joinChat}
-            className="px-4 py-2 text-sm sm:text-base dark:bg-blue-500 hover:dark:bg-blue-700 rounded-xl"
+            className="px-4 py-2 text-sm sm:text-base bg-blue-600 text-white  dark:bg-blue-500 hover:bg-blue-700 hover:dark:bg-blue-700 rounded-xl"
           >
             Join Room
           </button>
           <button
             onClick={createRoom}
-            className="px-4 py-2 text-sm sm:text-base dark:bg-orange-500 hover:dark:bg-orange-700 rounded-xl"
+            className="px-4 py-2 text-sm sm:text-base  bg-orange-500 hover:bg-orange-800 text-white dark:text-white dark:bg-orange-500 hover:dark:bg-orange-700 rounded-xl"
           >
             Create Room
           </button>
