@@ -133,7 +133,7 @@ const ChatPage = () => {
   return (
     <div className="">
       {/* this is a header */}
-      <header className="dark:border-gray-700 border-gray-700  fixed w-full dark:bg-gray-900 bg-grey-900 py-5 shadow flex justify-around items-center">
+      <header className="dark:border-gray-700 border-gray-700  fixed w-full dark:bg-gray-900 bg-gray-900 py-5 shadow flex justify-around items-center">
         {/* room name container */}
         <div>
           <h1 className="text-xl font-semibold text-white ">
