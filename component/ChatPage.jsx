@@ -180,9 +180,9 @@ const ChatPage = () => {
                 />
                 <div className="flex flex-col gap-1">
                   <p className="text-xs sm:text-sm font-bold">{message.sender}</p>
-                  <p className="text-sm sm:text-base ">{message.content}</p>
-                  <p className="text-[10px] sm:text-xs  text-gray-400">
-                    {/* {timeAgo(message.timeStamp)} */}
+                  <p className="text-sm sm:text-base">{message.content}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400">
+                    {timeAgo(message.timeStamp)}
                   </p>
                 </div>
               </div>
